@@ -37,21 +37,21 @@ def createTreasure():
     global finalReward
     finalReward = sprites.create(img("""
             . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . b d b . . . . . . 
-                    . . . . . . . b d b c . . . . . 
+                    . . . . . . . . d . . . . . . . 
+                    . . . . . c . b d b . c . . . . 
+                    . . . b . . c b d b c . . b . . 
                     . . . . b b c 5 5 5 c b b . . . 
-                    . . . . b 5 5 5 1 5 5 5 b . . . 
+                    . . c . b 5 5 5 1 5 5 5 b . c . 
                     . . . c c 5 5 5 1 5 5 5 c c . . 
                     . . b b 5 5 5 1 1 1 5 5 5 b b . 
-                    . . d d 5 1 1 1 1 1 1 1 5 d d . 
+                    . d d d 5 1 1 1 5 1 1 1 5 d d d 
                     . . b b 5 5 5 1 1 1 5 5 5 b b . 
                     . . . c c 5 5 5 1 5 5 5 c c . . 
-                    . . . . b 5 5 5 1 5 5 5 b . . . 
+                    . . c . b 5 5 5 1 5 5 5 b . c . 
                     . . . . b b c 5 5 5 c b b . . . 
-                    . . . . . . c b d b c . . . . . 
-                    . . . . . . . b d b . . . . . . 
-                    . . . . . . . . . . . . . . . .
+                    . . . b . . c b d b c . . b . . 
+                    . . . . . c . b d b . c . . . . 
+                    . . . . . . . . d . . . . . . .
         """),
         SpriteKind.FinalPrize)
     finalReward.set_position(335, 277)
