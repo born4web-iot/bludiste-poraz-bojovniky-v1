@@ -33,6 +33,7 @@ function setLevel4 () {
     controller.moveSprite(Jedi, 100, 100)
     scene.cameraFollowSprite(Jedi)
     randomTreasurePlace()
+    randomSharksLevel4()
 }
 function randomSharksLevel4 () {
     kolikZaraloku = randint(1, 5)
