@@ -100,11 +100,19 @@ function createXBounceEnemy (X: number, Y: number, XSpeed: number) {
     XEnemy.setVelocity(XSpeed, 0)
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite2, otherSprite2) {
-    game.gameOver(false)
+    info.changeLifeBy(-1)
+    BeziciLevel += -1
+    clearOldLevel()
+    game.splash("Zivot v lamprdone opatrne!")
 })
 function showXYPosition (mySprite: Sprite) {
     scene.cameraFollowSprite(mySprite)
     console.log("X: " + ("" + mySprite.x) + " Y: " + ("" + mySprite.y))
+}
+function clearOldLevel () {
+    sprites.destroyAllSpritesOfKind(SpriteKind.FinalPrize)
+    sprites.destroyAllSpritesOfKind(SpriteKind.Player)
+    sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
 }
 function createTreasure (X: number, Y: number) {
     finalReward = sprites.create(img`
@@ -282,6 +290,26 @@ function setLevel3 () {
     scene.cameraFollowSprite(Jedi)
     createTreasure(491, 91)
 }
+function playLevel () {
+    if (BeziciLevel != PocitadloLevelu) {
+        BeziciLevel = PocitadloLevelu
+        if (PocitadloLevelu > 4) {
+            game.gameOver(true)
+        }
+        if (BeziciLevel == 1) {
+            setLevel1()
+        }
+        if (BeziciLevel == 2) {
+            setLevel2()
+        }
+        if (BeziciLevel == 3) {
+            setLevel3()
+        }
+        if (BeziciLevel == 4) {
+            setLevel4()
+        }
+    }
+}
 function createYBounceEnemy (X2: number, Y2: number, YSpeed: number) {
     XEnemy = sprites.create(img`
         ..............cfff..............
@@ -333,7 +361,7 @@ function setLevel2 () {
         ........................
         ........................
         `, SpriteKind.Player)
-    Jedi.setPosition(30, 35)
+    Jedi.setPosition(384, 86)
     controller.moveSprite(Jedi, 100, 100)
     scene.cameraFollowSprite(Jedi)
     createTreasure(193, 421)
@@ -348,7 +376,10 @@ function setLevel2 () {
     createXBounceEnemy(380, 185, 60)
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.FinalPrize, function (sprite, otherSprite) {
-    game.gameOver(true)
+    PocitadloLevelu += 1
+    clearOldLevel()
+    playLevel()
+    game.splash("Konec levelu gratulujeme!")
 })
 function setLevel1 () {
     tiles.setCurrentTilemap(tilemap`level 1`)
@@ -395,7 +426,15 @@ let Poklad_Y: number[] = []
 let ktery_poklad = 0
 let kolikZaraloku = 0
 let Jedi: Sprite = null
-setLevel4()
-game.onUpdateInterval(1000, function () {
+let BeziciLevel = 0
+let PocitadloLevelu = 0
+PocitadloLevelu = 1
+BeziciLevel = 0
+info.setLife(3)
+playLevel()
+forever(function () {
+    playLevel()
+})
+game.onUpdateInterval(500, function () {
 	
 })
